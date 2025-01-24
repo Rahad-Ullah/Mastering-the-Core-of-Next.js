@@ -3,7 +3,7 @@ import LatestPosts from "@/components/latestPosts/LatestPost";
 import { getAllPosts } from "@/services/PostServices";
 
 const HomePage = async () => {
-  const posts = await getAllPosts();
+  const posts = await getAllPosts("isr");
 
   return (
     <>
