@@ -30,3 +30,18 @@ export const getAllPosts = async (type?: string, wait = false) => {
 
   return res.json();
 };
+
+export const getPost = async (id: string, wait = false) => {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/posts/${id}`);
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch posts data");
+  }
+
+  if (wait) {
+    delay(2000);
+  }
+
+  return res.json();
+};
+
