@@ -1,3 +1,4 @@
+import { TPost } from "@/types";
 import { delay } from "@/utils/delay";
 
 export const getAllPosts = async (type?: string, wait = false) => {
@@ -10,7 +11,7 @@ export const getAllPosts = async (type?: string, wait = false) => {
   } else if (type === "isr") {
     fetchOptions = {
       next: {
-        revalidate: 30,
+        tags: ["Posts"],
       },
     };
   }
@@ -45,3 +46,15 @@ export const getPost = async (id: string, wait = false) => {
   return res.json();
 };
 
+export const createPost = async (data: TPost) => {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_API}/posts`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+    cache: "no-store",
+  });
+
+  return res.json();
+};
